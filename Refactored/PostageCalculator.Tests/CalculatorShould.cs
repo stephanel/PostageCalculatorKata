@@ -32,8 +32,8 @@ namespace PostageCalculator.Tests
         [InlineData(1, 1, 1, MaximumSmallDepth)]
         public void Charge_a_flat_rate_for_a_small_package(int weight, int height, int width, int depth)
         {
-            Assert.Equal(new Money(Currency.Gbp, SmallPackagePrice),
-                _calculator.Calculate(weight, height, width, depth, Currency.Gbp));
+            Assert.Equal(new Money(CurrencyKind.Gbp, SmallPackagePrice),
+                _calculator.Calculate(weight, height, width, depth, CurrencyKind.Gbp));
         }
 
         [Theory]
@@ -47,8 +47,8 @@ namespace PostageCalculator.Tests
         [InlineData(1, 1, 1, MaximumMediumDepth)]
         public void Price_a_medium_package_by_weight(int weight, int height, int width, int depth)
         {
-            Assert.Equal(new Money(Currency.Gbp, weight * 4),
-                _calculator.Calculate(weight, height, width, depth, Currency.Gbp));
+            Assert.Equal(new Money(CurrencyKind.Gbp, weight * 4),
+                _calculator.Calculate(weight, height, width, depth, CurrencyKind.Gbp));
         }
 
         [Theory]
@@ -58,8 +58,8 @@ namespace PostageCalculator.Tests
         [InlineData(1, 1, 1, MaximumMediumDepth + 1)]
         public void Price_a_large_heavy_package_by_weight(int weight, int height, int width, int depth)
         {
-            Assert.Equal(new Money(Currency.Gbp, weight * 6),
-                _calculator.Calculate(weight, height, width, depth, Currency.Gbp));
+            Assert.Equal(new Money(CurrencyKind.Gbp, weight * 6),
+                _calculator.Calculate(weight, height, width, depth, CurrencyKind.Gbp));
         }
 
         [Theory]
@@ -68,14 +68,14 @@ namespace PostageCalculator.Tests
         [InlineData(1, 1, 1, 1001)]
         public void Price_a_large_light_package_by_volume(int weight, int height, int width, int depth)
         {
-            Assert.Equal(new Money(Currency.Gbp, (height * width * depth / 1000m) * 6),
-                _calculator.Calculate(weight, height, width, depth, Currency.Gbp));
+            Assert.Equal(new Money(CurrencyKind.Gbp, (height * width * depth / 1000m) * 6),
+                _calculator.Calculate(weight, height, width, depth, CurrencyKind.Gbp));
         }
 
         [Theory]
-        [InlineData(Currency.Eur, GbpToEur)]
-        [InlineData(Currency.Chf, GbpToChf)]
-        public void Add_commission_for_currency_other_than_gbp(Currency currency, decimal exchangeRate)
+        [InlineData(CurrencyKind.Eur, GbpToEur)]
+        [InlineData(CurrencyKind.Chf, GbpToChf)]
+        public void Add_commission_for_currency_other_than_gbp(CurrencyKind currency, decimal exchangeRate)
         {
             Assert.Equal(new Money(currency, (SmallPackagePrice + Commission) * exchangeRate),
                 _calculator.Calculate(20, 20, 20, 20, currency));

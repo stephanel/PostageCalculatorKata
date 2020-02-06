@@ -2,13 +2,13 @@
 {
     public struct Money
     {
-        public Money(Currency currency, decimal amount)
+        public Money(CurrencyKind currency, decimal amount)
         {
             Currency = currency;
             Amount = amount;
         }
 
-        public Currency Currency { get; }
+        public CurrencyKind Currency { get; }
         public decimal Amount { get; }
 
         public override string ToString()
