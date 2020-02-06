@@ -1,4 +1,4 @@
-﻿namespace Refactored.PostageCalculator
+﻿namespace PostageCalculator
 {
     public enum Currency
     {

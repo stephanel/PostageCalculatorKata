@@ -1,26 +1,16 @@
 ﻿using System;
 
-namespace Refactored.PostageCalculator
+namespace PostageCalculator
 {
     public class Calculator
     {
         public Money Calculate(int weight, int height, int width, int depth, Currency currency)
         {
-            var postageInBaseCurrency = PostageInBaseCurrency(weight, height, width, depth);
-            return ConvertCurrency(postageInBaseCurrency, currency);
-        }
+            var package = Package.CreateSizedPackage(weight, height, width, depth);
 
-        private decimal PostageInBaseCurrency(int weight, int height, int width, int depth)
-        {
-            if (weight <= 60 && height <= 229 && width <= 162 && depth <= 25)
-            {
-                return 120m;
-            }
-            if (weight <= 500 && height <= 324 && width <= 229 && depth <= 100)
-            {
-                return weight * 4;
-            }
-            return Math.Max(weight, height * width * depth / 1000m) * 6;
+            var postageInBaseCurrency = package.PostageInBaseCurrency();
+
+            return ConvertCurrency(postageInBaseCurrency, currency);
         }
 
         private Money ConvertCurrency(decimal amountInBaseCurrency, Currency currency)

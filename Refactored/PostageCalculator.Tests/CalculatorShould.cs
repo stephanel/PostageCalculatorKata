@@ -1,7 +1,6 @@
-using System;
 using Xunit;
 
-namespace Refactored.PostageCalculator.Tests
+namespace PostageCalculator.Tests
 {
     public class CalculatorShould
     {
