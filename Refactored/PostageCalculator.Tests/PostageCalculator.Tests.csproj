@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Refactored.PostageCalculator\Refactored.PostageCalculator.csproj" />
+    <ProjectReference Include="..\PostageCalculator\PostageCalculator.csproj" />
   </ItemGroup>
 
 </Project>
